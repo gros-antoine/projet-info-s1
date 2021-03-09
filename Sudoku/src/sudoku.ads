@@ -10,14 +10,19 @@ package Sudoku is
    
    type T_Grille is array (T_Indice range <>, T_Indice range <>) of T_Case; 
    
+   subtype T_Ordre is T_Indice range 3..4;
+   
    subtype T_Taille is T_Indice range 9..16;
    
    type T_Sudoku(taille : T_Taille) is record
       
       grille : T_Grille(1..taille, 1..taille) := (others => (others => Vide));
+      ordre : T_Ordre := taille ** 1/2;
       
    end record;
    
    function verification(sudoko : T_Sudoku) return Boolean;
+   
+   
    
 end Sudoku;
