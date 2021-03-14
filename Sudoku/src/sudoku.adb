@@ -1,21 +1,20 @@
+with Ada.Integer_Text_IO;
+use Ada.Integer_Text_IO;
+
+with Ada.Text_IO;
+use Ada.Text_IO;
+
 package body Sudoku is
 
 
    function verification(sudoko : T_Sudoku) return Boolean is
       
-      grille : T_Grille;
-      taille : T_Taille;
-      ordre : T_Ordre;
+      grille : T_Grille := sudoko.grille;
+      taille : T_Taille := sudoko.taille;
+      ordre : T_Ordre := sudoko.ordre;
       buffer : T_Case;
       
    begin
-      
-      grille := sudoko.grille;
-      taille := sudoko.taille;
-      ordre := sudoku.ordre;
-      
-      
-      return false;
       
       -- Parcours des lignes
       for i in 1..taille loop
@@ -52,7 +51,6 @@ package body Sudoku is
             end loop;
          end loop;
       end loop;
-   
       
       -- Parcours des régions
       for i in 1..ordre loop
@@ -62,16 +60,24 @@ package body Sudoku is
             for k in 1..ordre loop
                for l in 1..ordre loop
                   
-                  buffer := grille((k - 1) * ordre , )
+                  buffer := grille((i - 1) * ordre + k, (j - 1) * ordre + l);
                   
                   -- Parcours des cases comparées
                   for m in k..ordre loop
                      for n in l..ordre loop
                         
+                        if(grille(m, n) = buffer) then
+                           return false;
+                        end if;
                         
-                  
-                  
-               
+                     end loop;
+                  end loop;
+               end loop;
+            end loop;
+         end loop;
+      end loop;
+      
+      return true;
       
    end verification;
    
